@@ -64,7 +64,7 @@ const exclude = (word, excluded) => {
     return true;
 }
   // Get words of wordlength and does not include any excluded character in excludeFilter
-  let wordList = words.split('\n');
+  let wordList = words.split('\r\n');
 
   const results = wordList.filter(word => word.length === wordlength)
   .filter(word => word.startsWith(startFilter))
@@ -89,7 +89,7 @@ const exclude = (word, excluded) => {
               <input
                 type="text" 
                 defaultValue={startFilter}
-                onChange={(e) => setStartFilter((e.target.value))}
+                onChange={(e) => setStartFilter((e.target.value.toLowerCase()))}
               />
             </label>
             <label>Ends With:
@@ -97,7 +97,7 @@ const exclude = (word, excluded) => {
 
                 type="text"
                 defaultValue={endFilter}
-                onChange={(e) => setEndFilter((e.target.value))}
+                onChange={(e) => setEndFilter((e.target.value.toLowerCase()))}
               />
             </label>
             <label>Contains:
@@ -105,17 +105,17 @@ const exclude = (word, excluded) => {
                 type="text"
 
                 defaultValue={containsFilter}
-                onChange={(e) => setContainsFilter((e.target.value))}
+                onChange={(e) => setContainsFilter((e.target.value.toLowerCase()))}
               />
             </label>
             <label>Excluding:
               <input
                 type="text"
                 defaultValue={excludingFilter}
-                onChange={(e) => setExcludingFilter((e.target.value))}
+                onChange={(e) => setExcludingFilter((e.target.valueString.toLowerCase()))}
               />
             </label>
-            <WordRow wordLength={wordlength} />
+           
           </form>
           <div style={{maxHeight: 400, overflow: 'auto'}}>
           <ul>
