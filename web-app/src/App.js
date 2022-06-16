@@ -13,23 +13,29 @@ function WordListItem(props) {
 // Create a row of character inputs equal to the wordlength
 function WordRow(props) {
   const row = [];
-  for (let i = 0; i < props.wordLength; i++) {
+  for (let i = 1; i < (props.wordLength+1); i++) {  //changed i and props.wordlength both to +1 to make assigning unique ID's easier
     row.push(
-      <label for={'chk' +i}>
-        
-        <input className='square' type="text" key={i} />
+//testing htmlFor vs for
+      <label htmlFor={'chk' +i}> 
+              <input className='square' type="text" pattern="[a-z]{1}" key={i} maxLength="1"/>                
+                
         <br/>
-        <input id={'chk' +i} key={i} type='checkbox' />
+        <input id={'chk' +i} key={((i*100))} type='checkbox' /> 
+
+        
       </label>
-    
+          //was this fix TOO quick and dirty? (Fixed double KEY error from log, the warnings remain. This fix supports words up to 99 in length. Should restrict wordlength to 1-99)
     );
-  }
-  return <div>{row}</div>;
+  }   
+
+
+ 
+  return <div> <boxinput> {row} </boxinput> </div>; //display the input boxes in a row. This does throw a warning error in console but seems to function?
 }
 
 function App() {
 
-  const [words, setWords] = useState('');
+  const [words, setWords] = useState(''); 
   const [wordlength, setWordlength] = useState(5);
   const [startFilter, setStartFilter] = useState('');
   const [endFilter, setEndFilter] = useState('');
@@ -70,7 +76,7 @@ const exclude = (word, excluded) => {
   .filter(word => word.startsWith(startFilter))
   .filter(word => word.endsWith(endFilter))
   .filter(word => containsFilter === '' || include (word, containsFilter))
-  .filter(word => excludingFilter === '' || !exclude (word, excludingFilter));
+  .filter(word => excludingFilter === '' || !exclude (word, excludingFilter)); //seems to be a bug regarding exlude
 
 
 
@@ -84,7 +90,7 @@ const exclude = (word, excluded) => {
                 defaultValue={wordlength}
                 onChange={(e) => setWordlength(parseInt(e.target.value))}
               />
-            </label>
+            </label> 
             <label>Starts With:
               <input
                 type="text" 
@@ -116,6 +122,7 @@ const exclude = (word, excluded) => {
               />
             </label>
            
+              <WordRow wordLength={wordlength} />   
           </form>
           <div style={{maxHeight: 400, overflow: 'auto'}}>
           <ul>
@@ -123,6 +130,7 @@ const exclude = (word, excluded) => {
           </ul>
           </div>
     </div>
+    
   );
 }
 
