@@ -13,7 +13,7 @@ function WordListItem(props) {
 // Create a row of character inputs equal to the wordlength
 function WordRow(props) {
   const row = [];
-  for (let i = 1; i < (props.wordLength+1); i++) {  //changed i and props.wordlength both to +1 to make assigning unique ID's easier
+  for (let i = 1; i < (props.wordLength+1); i++) {  
     row.push(
 //testing htmlFor vs for
       <label htmlFor={'chk' +i}> 
@@ -24,13 +24,13 @@ function WordRow(props) {
 
         
       </label>
-          //was this fix TOO quick and dirty? (Fixed double KEY error from log, the warnings remain. This fix supports words up to 99 in length. Should restrict wordlength to 1-99)
+          
     );
   }   
 
 
  
-  return <div> <boxinput> {row} </boxinput> </div>; //display the input boxes in a row. This does throw a warning error in console but seems to function?
+  return <div> <boxinput> {row} </boxinput> </div>; 
 }
 
 function App() {
