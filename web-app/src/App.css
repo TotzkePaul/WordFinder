@@ -60,7 +60,7 @@ ul {
   margin: 0; /* Remove margins */
 }
 
-boxinput {
+.boxinput {
   display: inline-flex;
   flex-direction: row;
 }
